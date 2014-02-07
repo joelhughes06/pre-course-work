@@ -1,4 +1,4 @@
-deck = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+deck = [11, 11, 11, 11, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
 
 puts 'Welcome to Casino de Blackjack!'
 puts 'Here\'s your first card:'
@@ -66,12 +66,52 @@ if answer == 'hit'
     puts 'Congratulations, you got Blackjack 21!'
     break
   end
-  while playertot > 21
+  while playertot > 21 && answer != 'stay'
     puts 'Your next card is ' + player3.to_s
     puts 'Your new total is ' + playertot.to_s
     puts 'Sorry, you busted. Please play again sometime.'
     break
   end
 elsif answer == 'stay'
-  puts 'Thanks for playing.'
+  puts 'Ok, Dealer\'s turn.'
 end
+
+
+
+  card6 = rand(deck.length.to_i)
+  deck.delete_at(card6.to_i)
+  dealer3 = deck[card6.to_i]
+  dealertot = dealerfirsttwo + dealer3
+  while dealertot < 17
+    puts 'Dealer\'s next card is ' + dealer3.to_s
+    puts 'Dealer total is ' + dealertot.to_s
+    dealertot = dealertot + dealer3
+    puts 'Dealer will take another hit.'
+    answer = gets.chomp.downcase
+    if answer == 'hit'
+    puts 'You got it.'
+    elsif answer == 'stay'
+    puts 'Player stays.'
+    break
+    else 
+    puts 'Please answer with hit or stay.'
+    end 
+  end
+  while dealertot > 17 && dealertot < 21
+    puts 'Dealer\'s next card is ' + dealer3.to_s
+    puts 'Dealer\'s new total is ' + dealertot.to_s
+    puts 'Dealer will stay at ' + dealertot.to_s
+    break
+  end
+  while dealertot == 21
+    puts 'Dealer\'s next card is ' + dealer3.to_s
+    puts 'Dealer\'s new total is ' + dealertot.to_s
+    puts 'Dealer has Blackjack 21.'
+    break
+  end
+  while dealertot > 21
+    puts 'Dealer\'s next card is ' + dealer3.to_s
+    puts 'Dealer\'s new total is ' + dealertot.to_s
+    puts 'Dealer busted. You win!'
+    break
+  end
